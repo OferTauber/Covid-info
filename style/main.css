@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color1: #191a19;
+  --color2: #1e5128;
+  --color3: #4e9f3d;
+  --color4: #d8e9a8;
+}
+
+html {
+  font-size: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.chart-container {
+  max-width: 800px;
+
+  margin: auto;
+  padding: 1rem;
+}
+
+.controlers-bar {
+  width: 100%;
+  height: 300px;
+  background-color: var(--color3);
+}
+
+/* 
+confirmed: 
+    deaths: 
+    critical: 
+    recovered:
+
+    
+*/

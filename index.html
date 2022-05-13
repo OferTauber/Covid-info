@@ -9,7 +9,38 @@
     <title>Covid19 Info</title>
   </head>
   <body>
-    <canvas id="my-chart"></canvas>
+    <div class="spinner hidden">Loading...</div>
+
+    <div class="chart-container">
+      <canvas id="my-chart"></canvas>
+    </div>
+    <div class="controlers-bar _hidden">
+      <div class="controlers-container">
+        <div class="buttons">
+          <div class="buttons-continents">
+            <button class="btn  world" data-data="world">World</button>
+            <button class="btn asia" data-data="asia">Asia</button>
+            <button class="btn africa" data-data="africa">Africa</button>
+            <button class="btn europe" data-data="europe">Europe</button>
+            <button class="btn oceania" data-data="oceania">Oceania</button>
+            <button class="btn americas" data-data="americas">Americas</button>
+          </div>
+          <div class="buttons-datum">
+            <button class="btn confirmed" data-data="confirmed">
+              Confirmed cases
+            </button>
+            <button class="btn deaths" data-data="deaths">Deaths</button>            
+            <button class="btn critical" data-data="critical">
+              Patients in critical condition
+            <button class="btn recovered" data-data="recovered">
+              Recovered Patients</button>
+          </div>
+        </div>
+        <select name="c" id="c">
+          <option value="temp">temp</option>
+        </select>
+      </div>
+    </div>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
@@ -18,7 +49,5 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="./scripts/app.js" defer type="module"></script>
-    <!-- <script src="./scripts/app.js"></script> -->
-    <!-- <script src="./app.js" defer type="module"></script> -->
   </body>
 </html>

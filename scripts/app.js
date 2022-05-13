@@ -5,13 +5,18 @@ import {
   filterContinent,
   filterCountry,
 } from './data_filtering.js';
+import { setCountriesToSelect, setEventsListeners } from './user_interface.js';
 
 const app = {
   dataBaseline: {},
   chartContext: document.querySelector('#my-chart').getContext('2d'),
   chart: undefined,
+  spinner: document.querySelector('.spinner'),
+  currentContinent: 'world',
+  currentDatum: 'confirmed',
 
   reset: async function () {
+    this.spinner.classList.toggle('hidden');
     try {
       const rawData = await getData();
       this.dataBaseline = await organizeData(
@@ -20,6 +25,7 @@ const app = {
       );
       const newChart = await this.genetateInitialChart();
       this.chart = newChart; // - Make sure the promise is resolved
+      this.spinner.classList.toggle('hidden');
     } catch (err) {
       errorMessage(err);
     }
@@ -29,6 +35,15 @@ const app = {
     const initialChartData = filterWorld(this.dataBaseline, 'confirmed');
     return createChart(this.chartContext, initialChartData);
   },
+
+  continentClick(continent) {
+    this.continent = continent;
+    const newChartData =
+      continent === 'world'
+        ? filterWorld(this.dataBaseline, this.currentDatum)
+        : filterContinent(this.dataBaseline, this.currentDatum, continent);
+    editChart(this.chart, newChartData);
+  },
 };
 
 //todo - create and impiort from new JS file
@@ -36,16 +51,14 @@ const errorMessage = (err) => {
   console.log(err);
 };
 
+setEventsListeners(app);
 app.reset();
 
-setTimeout(() => {
-  editChart(app.chart, filterCountry(app.dataBaseline, 'Israel'));
-}, 1000);
-//
-// const proccecDataToChart = (data, label, key) => {
-//   return {
-//     chartLabel: label,
-//     valuesX: data.map((cuntry) => cuntry.name),
-//     valuesY: data.map((cuntry) => cuntry[key]),
-//   };
-// };
+// setTimeout(() => {
+//   setCountriesToSelect(
+//     app.dataBaseline,
+//     'world',
+//     document.querySelector('select')
+//   );
+//   setEventsListeners();
+// }, 1000);
