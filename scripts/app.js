@@ -1,22 +1,34 @@
 import { getData, organizeData } from './get_data.js';
-import { chsrtIt } from './chsrt_it.js';
+import { createChart, editChart } from './chsrt_it.js';
+import {
+  filterWorld,
+  filterContinent,
+  filterCountry,
+} from './data_filtering.js';
 
-const reset = async function () {
-  try {
-    const rawData = await getData();
-    const dataBaseline = await organizeData(
-      rawData.covidData.data,
-      rawData.regionsData
-    );
-    const initialChartData = proccecDataToChart(
-      dataBaseline.asia,
-      'Confirmed cases in Asia',
-      'confirmed'
-    );
-    const myChart = await chsrtIt(chartContext, initialChartData);
-  } catch (err) {
-    errorMessage(err);
-  }
+const app = {
+  dataBaseline: {},
+  chartContext: document.querySelector('#my-chart').getContext('2d'),
+  chart: undefined,
+
+  reset: async function () {
+    try {
+      const rawData = await getData();
+      this.dataBaseline = await organizeData(
+        rawData.covidData.data,
+        rawData.regionsData
+      );
+      const newChart = await this.genetateInitialChart();
+      this.chart = newChart; // - Make sure the promise is resolved
+    } catch (err) {
+      errorMessage(err);
+    }
+  },
+
+  genetateInitialChart: async function () {
+    const initialChartData = filterWorld(this.dataBaseline, 'confirmed');
+    return createChart(this.chartContext, initialChartData);
+  },
 };
 
 //todo - create and impiort from new JS file
@@ -24,14 +36,16 @@ const errorMessage = (err) => {
   console.log(err);
 };
 
-const chartContext = document.querySelector('#my-chart').getContext('2d');
+app.reset();
 
-reset();
-const proccecDataToChart = (data, label, key) => {
-  console.log(data);
-  return {
-    chartLabel: label,
-    valuesX: data.map((cuntry) => cuntry.name),
-    valuesY: data.map((cuntry) => cuntry[key]),
-  };
-};
+setTimeout(() => {
+  editChart(app.chart, filterCountry(app.dataBaseline, 'Israel'));
+}, 1000);
+//
+// const proccecDataToChart = (data, label, key) => {
+//   return {
+//     chartLabel: label,
+//     valuesX: data.map((cuntry) => cuntry.name),
+//     valuesY: data.map((cuntry) => cuntry[key]),
+//   };
+// };

@@ -18,7 +18,6 @@ export const getData = async function () {
 };
 
 export const organizeData = async function (cuvidData, regionsData) {
-  // console.log(regionsData.asia[0]);
   const covidInfo = {};
   for (const key in regionsData) {
     covidInfo[key] = [];

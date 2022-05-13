@@ -1,5 +1,9 @@
-export const chsrtIt = async function (context, data) {
-  console.log(data);
+const COLOR_1 = '#191A19';
+const COLOR_2 = '#1E5128';
+const COLOR_3 = '#4E9F3D';
+const COLOR_4 = '#D8E9A8';
+
+export const createChart = async function (context, data) {
   return new Chart(context, {
     type: 'bar',
     data: {
@@ -8,22 +12,8 @@ export const chsrtIt = async function (context, data) {
         {
           label: data.chartLabel,
           data: data.valuesY,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          backgroundColor: [COLOR_1, COLOR_3],
+          borderColor: [COLOR_1, COLOR_3],
           borderWidth: 1,
         },
       ],
@@ -36,4 +26,12 @@ export const chsrtIt = async function (context, data) {
       },
     },
   });
+};
+
+export const editChart = function (chart, data) {
+  chart.data.datasets[0].label = data.chartLabel;
+  chart.data.datasets[0].data = data.valuesY;
+  chart.data.labels = data.valuesX;
+
+  chart.update();
 };
