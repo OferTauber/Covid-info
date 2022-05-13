@@ -37,11 +37,28 @@ const app = {
   },
 
   continentClick(continent) {
-    this.continent = continent;
+    this.currentContinent = continent;
     const newChartData =
       continent === 'world'
         ? filterWorld(this.dataBaseline, this.currentDatum)
-        : filterContinent(this.dataBaseline, this.currentDatum, continent);
+        : filterContinent(
+            this.dataBaseline,
+            this.currentDatum,
+            this.currentContinent
+          );
+    editChart(this.chart, newChartData);
+  },
+
+  datumClick(datum) {
+    this.currentDatum = datum;
+    const newChartData =
+      this.currentContinent === 'world'
+        ? filterWorld(this.dataBaseline, this.currentDatum)
+        : filterContinent(
+            this.dataBaseline,
+            this.currentDatum,
+            this.currentContinent
+          );
     editChart(this.chart, newChartData);
   },
 };
