@@ -25,6 +25,7 @@ const app = {
       );
       const newChart = await this.genetateInitialChart();
       this.chart = newChart; // - Make sure the promise is resolved
+      this.continentClick('world');
       this.spinner.classList.toggle('hidden');
     } catch (err) {
       errorMessage(err);
@@ -37,6 +38,7 @@ const app = {
   },
 
   continentClick(continent) {
+    setCountriesToSelect(this.dataBaseline, continent);
     this.currentContinent = continent;
     const newChartData =
       continent === 'world'
@@ -60,6 +62,10 @@ const app = {
             this.currentContinent
           );
     editChart(this.chart, newChartData);
+  },
+
+  countrySelected(country) {
+    editChart(this.chart, filterCountry(this.dataBaseline, country));
   },
 };
 

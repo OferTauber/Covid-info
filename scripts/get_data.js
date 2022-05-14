@@ -1,4 +1,5 @@
 const PROXI = 'https://api.codetabs.com/v1/proxy/?quest=';
+const PROXI2 = 'https://api.allorigins.win/raw?url=';
 const COVID_URL = 'https://corona-api.com/countries';
 const COUNTRIES_URL = 'https://restcountries.herokuapp.com/api/v1/region/';
 
@@ -68,7 +69,7 @@ const fetchRegions = async () => {
   const DataToReturn = {};
   try {
     for (const region of regions) {
-      promises.push(fetchData(COUNTRIES_URL + region, PROXI));
+      promises.push(fetchData(COUNTRIES_URL + region, PROXI2));
     }
     const resalts = await Promise.all(promises);
     for (const [index, resalt] of promises.entries()) {

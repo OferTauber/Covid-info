@@ -1,7 +1,8 @@
-export const setCountriesToSelect = function (data, continent, selectEl) {
+export const setCountriesToSelect = function (data, continent) {
+  const selectEl = document.querySelector('select');
   selectEl.innerHTML = '';
   const lablels = [];
-  if ((continent = 'world')) {
+  if (continent === 'world') {
     for (const [kye, continent] of Object.entries(data)) {
       for (const contry of continent) {
         lablels.push(contry.name);
@@ -40,4 +41,9 @@ export const setEventsListeners = function (appObj) {
       appObj.datumClick(e.target.dataset.data);
     });
   }
+
+  const select = document.querySelector('select');
+  select.addEventListener('change', (e) => {
+    appObj.countrySelected(e.target.value);
+  });
 };
