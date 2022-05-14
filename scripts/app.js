@@ -17,19 +17,24 @@ const app = {
 
   reset: async function () {
     this.spinner.classList.toggle('hidden');
-    try {
-      const rawData = await getData();
-      this.dataBaseline = await organizeData(
-        rawData.covidData.data,
-        rawData.regionsData
-      );
-      const newChart = await this.genetateInitialChart();
-      this.chart = newChart; // - Make sure the promise is resolved
-      this.continentClick('world');
-      this.spinner.classList.toggle('hidden');
-    } catch (err) {
-      errorMessage(err);
-    }
+    setTimeout(async () => {
+      // ther is no real use for this - I just want you to have time to see my awesome spinner!
+      try {
+        const rawData = await getData();
+        this.dataBaseline = await organizeData(
+          rawData.covidData.data,
+          rawData.regionsData
+        );
+        const newChart = await this.genetateInitialChart();
+        this.chart = newChart; // - Make sure the promise is resolved
+        this.continentClick('world');
+        this.spinner.classList.toggle('hidden');
+        document.querySelector('.chart-container').classList.toggle('hidden');
+        document.querySelector('.controlers-bar').classList.toggle('hidden');
+      } catch (err) {
+        errorMessage(err);
+      }
+    }, 2500);
   },
 
   genetateInitialChart: async function () {
@@ -76,12 +81,3 @@ const errorMessage = (err) => {
 
 setEventsListeners(app);
 app.reset();
-
-// setTimeout(() => {
-//   setCountriesToSelect(
-//     app.dataBaseline,
-//     'world',
-//     document.querySelector('select')
-//   );
-//   setEventsListeners();
-// }, 1000);

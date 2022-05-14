@@ -9,15 +9,23 @@
     <title>Covid19 Info</title>
   </head>
   <body>
-    <div class="spinner hidden">Loading...</div>
-
-    <div class="chart-container">
-      <canvas id="my-chart"></canvas>
+    <div class="spinner hidden">
+      <div class="spinning">
+        <img src="./assets/coronavirus-SVG.svg" alt="Loading">
+      </div>
+      <h2>Loading...</h2>
     </div>
-    <div class="controlers-bar _hidden">
+
+    <div class="chart-container hidden">
+      <canvas id="my-chart"></canvas>    
+    </div>
+
+    <div class="controlers-bar hidden">
+
       <div class="controlers-container">
         <div class="buttons">
-          <div class="buttons-continents">
+
+          <div class="buttons-continents buttons-wrap">
             <button class="btn  world" data-data="world">World</button>
             <button class="btn asia" data-data="asia">Asia</button>
             <button class="btn africa" data-data="africa">Africa</button>
@@ -25,19 +33,19 @@
             <button class="btn oceania" data-data="oceania">Oceania</button>
             <button class="btn americas" data-data="americas">Americas</button>
           </div>
-          <div class="buttons-datum">
+          <div class="buttons-datum buttons-wrap">
             <button class="btn confirmed" data-data="confirmed">
-              Confirmed cases
+              Confirmed<br>cases
             </button>
             <button class="btn deaths" data-data="deaths">Deaths</button>            
             <button class="btn critical" data-data="critical">
-              Patients in critical condition
+              Patients in<br>critical condition
             <button class="btn recovered" data-data="recovered">
-              Recovered Patients</button>
+              Recovered<br>Patients</button>
           </div>
         </div>
         <select name="c" id="c">
-
+          
         </select>
       </div>
     </div>

@@ -5,28 +5,67 @@
 }
 
 :root {
-  --color1: #191a19;
-  --color2: #1e5128;
-  --color3: #4e9f3d;
-  --color4: #d8e9a8;
+  --color1: #4e944f;
+  --color2: #83bd75;
+  --color3: #b4e197;
+  --color4: #e9efc0;
+  --my-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  --max-width: 1200px;
 }
 
 html {
   font-size: 10px;
-}
-
-.hidden {
-  display: none;
+  font-family: var(--my-font);
 }
 
 body {
   height: 100vh;
-  background-color: var(--color3);
+  background-color: var(--color4);
+}
+
+.spinner {
+  height: 100hv;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 2rem;
+  padding-top: 5rem; */
+}
+
+.spinner h2 {
+  font-size: 5.5rem;
+}
+.spinning {
+  width: 60vmin;
+  margin: 4rem;
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .chart-container {
   background-color: var(--color4);
-  max-width: 800px;
+  background-color: white;
+  max-width: var(--max-width);
   flex-grow: 0;
   margin: auto;
   padding: 1rem;
@@ -34,14 +73,85 @@ body {
 
 .controlers-bar {
   width: 100%;
-  height: calc(100vh - 409px);
+  height: calc(100vh - 650px);
+  min-height: 200px;
   flex-grow: 1;
   flex-shrink: 1;
-  background-color: var(--color3);
+  background-color: var(--color4);
 }
 
-@media (max-width: 800px) {
+.controlers-container {
+  max-width: var(--max-width);
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 70%;
+  padding: 1rem;
+}
+.buttons {
+  flex: 0 1 500px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.buttons-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+select {
+  width: 20rem;
+  font-size: 1.7rem;
+}
+
+.btn {
+  padding: 0.3rem 1rem;
+  height: 4rem;
+  box-shadow: none;
+  border-radius: 0.5rem;
+  font-family: var(--my-font);
+  font-size: 1.3rem;
+}
+
+.btn,
+select {
+  background-color: var(--color3);
+  color: var(--color1);
+}
+
+.btn:hover,
+select:hover {
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 1500px) {
+  .chart-container {
+    width: 1000px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .chart-container {
+    max-width: 96vw;
+  }
+
   .controlers-bar {
     height: calc(100vh - 55vw);
+  }
+}
+
+@media (max-width: 750px) {
+  .controlers-container {
+    flex-direction: column;
+  }
+  .buttons-wrap {
+    flex-wrap: wrap;
   }
 }
