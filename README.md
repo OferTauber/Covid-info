@@ -8,7 +8,7 @@ The graph is displayed using the Chrts JS library
 
 ## Tech Stack
 
-HTNL, CSS, JS, ChartsJS
+HTML, CSS, JS, ChartsJS
 
 ## Demo
 
