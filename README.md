@@ -16,7 +16,7 @@ https://ofer-covid-info.netlify.app
 
 ## Feedback
 
-If you have any feedback, please reach out to us at ofertauber@gmail.com
+If you have any feedback, please reach out to me at ofertauber@gmail.com
 
 ## Acknowledgements
 
